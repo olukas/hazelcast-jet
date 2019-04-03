@@ -30,10 +30,8 @@ import com.hazelcast.jet.core.Vertex;
 import com.hazelcast.jet.core.processor.SinkProcessors;
 import com.hazelcast.nio.Address;
 import com.hazelcast.test.HazelcastSerialClassRunner;
-import com.hazelcast.test.annotation.NightlyTest;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 
 import javax.annotation.Nonnull;
@@ -53,7 +51,6 @@ import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@Category(NightlyTest.class)
 @RunWith(HazelcastSerialClassRunner.class)
 public class BackpressureTest extends JetTestSupport {
 
