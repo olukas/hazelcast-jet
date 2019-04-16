@@ -79,10 +79,10 @@ public class HashJoinP<E0> extends AbstractProcessor {
         this.keyFns = keyFns;
         this.lookupTables = new ArrayList<>(Collections.nCopies(keyFns.size(), null));
         BiFunction<E0, Object[], Object> mapTupleToOutputFn;
+        checkTrue(mapToOutputBiFn == null ^ mapToOutputTriFn == null,
+                "Exactly one of mapToOutputBiFn and mapToOutputTriFn must be non-null");
         if (!tags.isEmpty()) {
-            if (mapToOutputBiFn == null) {
-                throw new NullPointerException("mapToOutputBiFn required with tags");
-            }
+            requireNonNull(mapToOutputBiFn, "mapToOutputBiFn required with tags");
             mapTupleToOutputFn = (item, tuple) -> {
                 ItemsByTag res = new ItemsByTag();
                 for (int i = 0; i < tags.size(); i++) {
