@@ -28,4 +28,9 @@
         <Class name="com.hazelcast.jet.impl.connector.StreamFilesP" />
         <Bug pattern="RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE"/>
     </Match>
+    <!-- false positive in Ibm JDK 8, see https://github.com/spotbugs/spotbugs/issues/844 -->
+    <Match>
+        <Class name="com.hazelcast.jet.impl.processor.HashJoinP" />
+        <Bug pattern="NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE"/>
+    </Match>
 </FindBugsFilter>
