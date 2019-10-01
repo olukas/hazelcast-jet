@@ -41,6 +41,7 @@ public class LoggerSinkTest extends JetTestSupport {
 
     @Test
     public void loggerSink() {
+        sleepSeconds(10);
         // Given
         JetInstance jet = createJetMember();
         String srcName = randomName();
@@ -57,6 +58,10 @@ public class LoggerSinkTest extends JetTestSupport {
 
         // Then
         List<LoggingEvent> allValues = logCaptor.getAllValues();
+        System.out.println("GOING TO PRINT LOG:");
+        for (LoggingEvent allValue : allValues) {
+            System.out.println("PRINT LOG: " + allValue.getRenderedMessage());
+        }
         boolean match = allValues
                 .stream()
                 .map(LoggingEvent::getRenderedMessage)

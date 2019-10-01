@@ -38,7 +38,6 @@ import com.hazelcast.nio.Address;
 import com.hazelcast.spi.impl.NodeEngineImpl;
 import com.hazelcast.test.AssertTask;
 import com.hazelcast.test.HazelcastTestSupport;
-import org.junit.After;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -63,7 +62,7 @@ public abstract class JetTestSupport extends HazelcastTestSupport {
     protected ILogger logger = Logger.getLogger(getClass());
     private JetTestInstanceFactory instanceFactory;
 
-    @After
+    //@After
     public void shutdownFactory() throws Exception {
         if (instanceFactory != null) {
             spawn(() -> instanceFactory.terminateAll())
