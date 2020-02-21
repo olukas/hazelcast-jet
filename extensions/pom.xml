@@ -27,7 +27,7 @@
     <artifactId>hazelcast-jet-extensions</artifactId>
 
     <parent>
-        <artifactId>hazelcast-jet-root</artifactId>
+        <artifactId>hazelcast-jet-sonar-temp</artifactId>
         <groupId>com.hazelcast.jet</groupId>
         <version>4.1-SNAPSHOT</version>
     </parent>
