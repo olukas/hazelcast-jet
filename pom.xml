@@ -633,7 +633,7 @@
                                 <configuration>
                                     <argLine>@{argLine}</argLine>
                                     <excludedGroups combine.self="override">
-                                        com.hazelcast.test.annotation.SlowTest,com.hazelcast.test.annotation.NightlyTest,com.hazelcast.jet.test.IgnoredForCoverage
+                                        com.hazelcast.jet.test.IgnoredForCoverage
                                     </excludedGroups>
                                 </configuration>
                             </execution>
