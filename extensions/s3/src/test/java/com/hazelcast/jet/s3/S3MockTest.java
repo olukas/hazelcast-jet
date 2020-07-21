@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 import static java.lang.System.lineSeparator;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.stream.IntStream.range;
@@ -64,13 +65,16 @@ public class S3MockTest extends S3TestBase {
 
     @BeforeClass
     public static void setupS3() {
+        assumeNotRunInJenkinsOnWindows();
         s3MockContainer.followOutput(outputFrame -> logger.info(outputFrame.getUtf8String().trim()));
         s3Client = s3MockContainer.client();
     }
 
     @AfterClass
     public static void teardown() {
-        s3Client.close();
+        if (s3Client != null) {
+            s3Client.close();
+        }
     }
 
     @Before

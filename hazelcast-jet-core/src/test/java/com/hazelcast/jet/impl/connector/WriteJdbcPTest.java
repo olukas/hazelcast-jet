@@ -48,6 +48,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 import static com.hazelcast.jet.Util.entry;
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -66,6 +67,7 @@ public class WriteJdbcPTest extends SimpleTestInClusterSupport {
 
     @BeforeClass
     public static void setupClass() {
+        assumeNotRunInJenkinsOnWindows();
         initialize(2, null);
     }
 

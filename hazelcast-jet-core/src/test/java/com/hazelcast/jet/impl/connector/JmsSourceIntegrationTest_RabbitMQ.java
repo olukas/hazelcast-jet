@@ -24,6 +24,9 @@ import org.junit.experimental.categories.Category;
 import org.testcontainers.containers.RabbitMQContainer;
 
 import javax.jms.ConnectionFactory;
+import org.junit.BeforeClass;
+
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 
 @Category(NightlyTest.class)
 public class JmsSourceIntegrationTest_RabbitMQ extends JmsSourceIntegrationTestBase {
@@ -36,6 +39,11 @@ public class JmsSourceIntegrationTest_RabbitMQ extends JmsSourceIntegrationTestB
         f.setUri(container.getAmqpUrl());
         return f;
     };
+
+    @BeforeClass
+    public static void ignoreInJenkinsOnWindows() {
+        assumeNotRunInJenkinsOnWindows();
+    }
 
     @Override
     protected SupplierEx<ConnectionFactory> getConnectionFactory() {

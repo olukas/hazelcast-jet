@@ -49,8 +49,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.junit.BeforeClass;
 
 import static com.google.common.collect.ImmutableMap.of;
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.assertj.core.util.Lists.newArrayList;
@@ -74,6 +76,11 @@ public abstract class BaseElasticTest {
     protected RestHighLevelClient elasticClient;
     protected JetInstance jet;
     protected IList<String> results;
+
+    @BeforeClass
+    public static void ignoreInJenkinsOnWindows() {
+        assumeNotRunInJenkinsOnWindows();
+    }
 
     @Before
     public void setUpBase() {

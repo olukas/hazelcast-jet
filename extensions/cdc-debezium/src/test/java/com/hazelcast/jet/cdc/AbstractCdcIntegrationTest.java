@@ -30,11 +30,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import org.junit.BeforeClass;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 
 public class AbstractCdcIntegrationTest extends JetTestSupport {
+
+    @BeforeClass
+    public static void ignoreInJenkinsOnWindows() {
+        assumeNotRunInJenkinsOnWindows();
+    }
 
     @Nonnull
     protected static List<String> mapResultsToSortedList(IMap<?, ?> map) {

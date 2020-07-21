@@ -17,12 +17,12 @@
 package com.hazelcast.jet.hadoop.impl;
 
 import com.hazelcast.jet.SimpleTestInClusterSupport;
-import org.junit.Before;
+import org.junit.BeforeClass;
 
 public abstract class HadoopTestSupport extends SimpleTestInClusterSupport {
 
-    @Before
-    public void hadoopSupportBefore() {
+    @BeforeClass
+    public static void hadoopSupportBefore() {
         // Tests fail on windows. If you want to run them, comment out this line and
         // follow this instructions: https://stackoverflow.com/a/35652866/952135
         assumeThatNoWindowsOS();

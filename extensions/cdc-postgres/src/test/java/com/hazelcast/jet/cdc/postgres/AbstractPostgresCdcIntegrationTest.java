@@ -28,7 +28,9 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import org.junit.BeforeClass;
 
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 import static org.testcontainers.containers.PostgreSQLContainer.POSTGRESQL_PORT;
 
 public abstract class AbstractPostgresCdcIntegrationTest extends AbstractCdcIntegrationTest {
@@ -38,6 +40,11 @@ public abstract class AbstractPostgresCdcIntegrationTest extends AbstractCdcInte
             .withDatabaseName("postgres")
             .withUsername("postgres")
             .withPassword("postgres");
+
+    @BeforeClass
+    public static void ignoreInJenkinsOnWindows() {
+        assumeNotRunInJenkinsOnWindows();
+    }
 
     protected PostgresCdcSources.Builder sourceBuilder(String name) {
         return PostgresCdcSources.postgres(name)

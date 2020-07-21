@@ -24,8 +24,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.junit.BeforeClass;
 
 import static org.testcontainers.containers.MySQLContainer.MYSQL_PORT;
+import static com.hazelcast.jet.test.TestsuiteUtils.assumeNotRunInJenkinsOnWindows;
 
 public abstract class AbstractMySqlCdcIntegrationTest extends AbstractCdcIntegrationTest {
 
@@ -33,6 +35,11 @@ public abstract class AbstractMySqlCdcIntegrationTest extends AbstractCdcIntegra
     public MySQLContainer<?> mysql = new MySQLContainer<>("debezium/example-mysql:1.2")
             .withUsername("mysqluser")
             .withPassword("mysqlpw");
+
+    @BeforeClass
+    public static void ignoreInJenkinsOnWindows() {
+        assumeNotRunInJenkinsOnWindows();
+    }
 
     protected MySqlCdcSources.Builder sourceBuilder(String name) {
         return MySqlCdcSources.mysql(name)
