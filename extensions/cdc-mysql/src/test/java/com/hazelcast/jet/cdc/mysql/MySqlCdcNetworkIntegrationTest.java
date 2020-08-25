@@ -97,7 +97,11 @@ public class MySqlCdcNetworkIntegrationTest extends AbstractCdcIntegrationTest {
     public void when_noDatabaseToConnectTo() throws Exception {
         int port = findRandomOpenPortInRange(MYSQL_PORT + 100, MYSQL_PORT + 1000);
 
-        Pipeline pipeline = initPipeline("localhost", port);
+        MySQLContainer<?> mysql = initMySql(null, port);
+        String containerIpAddress = mysql.getContainerIpAddress();
+        stopContainer(mysql);
+
+        Pipeline pipeline = initPipeline(containerIpAddress, port);
 
         // when job starts
         JetInstance jet = createJetMembers(2)[0];
@@ -116,7 +120,7 @@ public class MySqlCdcNetworkIntegrationTest extends AbstractCdcIntegrationTest {
             assertTrue(jet.getMap("results").isEmpty());
 
             // and DB starts
-            MySQLContainer<?> mysql = initMySql(null, port);
+            mysql = initMySql(null, port);
             try {
                 // then source connects successfully
                 assertEqualsEventually(() -> jet.getMap("results").size(), 4);
