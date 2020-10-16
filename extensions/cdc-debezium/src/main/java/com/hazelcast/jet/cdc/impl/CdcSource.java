@@ -382,7 +382,7 @@ public abstract class CdcSource<T> {
             return history != null && !history.isEmpty();
         }
 
-        @Override
+//        @Override
         public boolean storageExists() {
             return history != null;
         }
