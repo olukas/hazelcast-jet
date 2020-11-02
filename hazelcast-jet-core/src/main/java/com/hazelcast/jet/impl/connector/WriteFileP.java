@@ -199,6 +199,11 @@ public final class WriteFileP<T> implements Processor {
 
     @Override
     public boolean snapshotCommitFinish(boolean success) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
         return utility.snapshotCommitFinish(success);
     }
 
