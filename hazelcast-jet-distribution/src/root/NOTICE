@@ -46,7 +46,7 @@ Apache License, Version 2.0
   T-Digest:3.2
   Netty Reactive Streams Implementation:2.0.3
   Netty Reactive Streams HTTP support:2.0.3
-  Apache Commons Codec:1.11
+  Apache Commons Codec:1.12
   Commons Logging:1.1.3
   picocli - a mighty tiny Command Line Interface:3.9.0
   Debezium API:1.2.1.Final
