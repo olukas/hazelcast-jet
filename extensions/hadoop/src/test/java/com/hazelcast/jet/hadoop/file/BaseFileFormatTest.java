@@ -20,6 +20,7 @@ import com.hazelcast.function.ConsumerEx;
 import com.hazelcast.jet.JetException;
 import com.hazelcast.jet.JetInstance;
 import com.hazelcast.jet.core.JetTestSupport;
+import com.hazelcast.jet.pipeline.BatchSource;
 import com.hazelcast.jet.pipeline.Pipeline;
 import com.hazelcast.jet.pipeline.Sinks;
 import com.hazelcast.jet.pipeline.file.FileSourceBuilder;
@@ -53,6 +54,7 @@ public abstract class BaseFileFormatTest extends JetTestSupport {
 
     @Before
     public void setUp() throws Exception {
+        System.out.println("Start setup with " + useHadoop);
         currentDir = Paths.get(".").toAbsolutePath().normalize().toString();
         if (useHadoop) {
             assumeThatNoWindowsOS();
@@ -79,12 +81,17 @@ public abstract class BaseFileFormatTest extends JetTestSupport {
 
         Pipeline p = Pipeline.create();
 
-        p.readFrom(source.build())
-         .apply(Assertions.assertCollected(assertion));
-
+        System.out.println("Before build pipeline with " + useHadoop);
+        BatchSource<T> build = source.build();
+        p.readFrom(build)
+                .apply(Assertions.assertCollected(assertion));
+        System.out.println("Start Jet with " + useHadoop);
         JetInstance[] jets = createJetMembers(memberCount);
+        System.out.println("Started Jet with " + useHadoop);
         try {
+            System.out.println("Start job with " + useHadoop);
             jets[0].newJob(p).join();
+            System.out.println("Finished job with " + useHadoop);
         } finally {
             for (JetInstance jet : jets) {
                 jet.shutdown();

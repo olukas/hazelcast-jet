@@ -29,7 +29,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class JsonFileFormatTest extends BaseFileFormatTest {
 
-    @Test
+    //@Test
     @Ignore("It's an issue, remove this @Ignore once it will be fixed")
     public void shouldReadPrettyPrintedJsonFile() throws Exception {
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
@@ -44,6 +44,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
 
     @Test
     public void shouldReadJsonLinesFile() throws Exception {
+        System.out.println("Start test with hadoop " + useHadoop);
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
                                                     .glob("file.jsonl")
                                                     .format(FileFormat.json(User.class));
@@ -54,7 +55,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
         );
     }
 
-    @Test
+    //@Test
     public void shouldReadJsonLinesFileWithMoreAttributesThanTargetClass() throws Exception {
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
                                                     .glob("file-more-attributes.jsonl")
@@ -66,7 +67,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
         );
     }
 
-    @Test
+    //@Test
     public void shouldReadJsonLinesFileWithLessColumnsThanTargetClass() throws Exception {
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
                                                     .glob("file-less-attributes.jsonl")
@@ -78,7 +79,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
         );
     }
 
-    @Test
+    //@Test
     public void shouldReadEmptyJsonFile() throws Exception {
 
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
@@ -88,7 +89,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
         assertItemsInSource(source, items -> assertThat(items).isEmpty());
     }
 
-    @Test
+    //@Test
     public void shouldThrowWhenInvalidFileType() throws Exception {
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
                                                     .glob("invalid-data.png")
@@ -97,7 +98,7 @@ public class JsonFileFormatTest extends BaseFileFormatTest {
         assertJobFailed(source, JsonParseException.class, "Unexpected character");
     }
 
-    @Test
+    //@Test
     public void shouldThrowWhenWrongFormatting() throws Exception {
         FileSourceBuilder<User> source = FileSources.files(currentDir + "/src/test/resources")
                                                     .glob("file-invalid.jsonl")
